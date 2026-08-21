@@ -28,9 +28,18 @@ services:
     ports:
       - "9100:9100"
 
+    volumes:
+      - /proc:/host/proc:ro
+      - /sys:/host/sys:ro
+      - /:/host/root:ro
+
+    command:
+      - "--path.procfs=/host/proc"
+      - "--path.sysfs=/host/sys"
+      - "--path.rootfs=/host/root"
+
     networks:
       - monitoring
-
 
   grafana:
     image: grafana/grafana:12.1.1
